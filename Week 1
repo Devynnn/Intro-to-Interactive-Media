@@ -1,6 +1,6 @@
 LINK: <iframe src="https://editor.p5js.org/Devynnn/full/TD9ZB05AL"></iframe>
 
-sketch:
+SKETCH:
 
 function setup() {
   createCanvas(400, 400);
