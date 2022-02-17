@@ -1,0 +1,59 @@
+link : https://editor.p5js.org/Devynnn/sketches/tJt1Zf7SE
+
+let flower1;
+let flower2;
+let flower3;
+let flower4;
+let flower5;
+let flower6;
+let flower7;
+function setup() {
+  createCanvas(400, 400);
+  angleMode(DEGREES);
+  flower1 = new flower(200, 200); //middle
+  flower2 = new flower(80, 200); // left
+  flower3 = new flower(130, 300); // bottom left
+  flower4 = new flower(270, 300); // bottom right
+  flower5 = new flower(320, 200); //right
+  flower6 = new flower(130, 100); //top left
+  flower7 = new flower(270, 100); //top right
+  frameRate(2)
+}
+
+function draw() {
+  background(156, 234, 240);
+  flower1.drawFlower(frameCount);
+  flower2.drawFlower(frameCount);
+  flower3.drawFlower(frameCount);
+  flower4.drawFlower(frameCount);
+  flower5.drawFlower(frameCount);
+  flower6.drawFlower(frameCount);
+  flower7.drawFlower(frameCount);
+}
+
+class flower {
+  constructor(xPos, yPos) {
+    this.x = xPos;
+    this.y = yPos;
+  }
+  drawFlower(deg) {
+    push();
+    translate(this.x, this.y);
+    for (let i = 0; i < 180; i += deg) {
+      rotate(i);
+      noStroke();
+      fill(random(0,255),random(0,255),random(0,255));
+      ellipse(0, 0, 100, 20);
+    }
+    fill(252, 186, 3);
+    ellipse(0, 0, 20, 20);
+    pop();
+  }
+}
+
+
+Documentation
+
+I had an idea to have flowers in a lake, so i started with the blueprint using class, and the idea was to make the petals rotate in the water. 
+I struggled with the rotation process, that i forgot to add framecount.The finishing product is not what i expected but it works just the same!
+
