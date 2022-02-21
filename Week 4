@@ -2,9 +2,12 @@ https://editor.p5js.org/Devynnn/sketches/qa55QhgY7
 
 For this assignment, I've learned to implement google trend data onto P5.js. There was not much thought put into it as we learned it step by step in class.
 I was looking for a serious topic that sparked a lot of peoples interest on the internet today and decided to go with Kanye West. Hilarious i know, but as you can
-see throught the data, at this moment time the amount of time Kanye West has been searched for has peaked its highest. Its a whole process to go search and download
-the information, but it gave me insight on how to add informational data to p5.js. I also wanted to add some text that relates to Kanye, so i chose random colors
-with a dark background to show how chaotic Kanye could be.
+see through the data, at this moment the amount of timeS Kanye West has been searched for has peaked its highest. Its a whole process to go search and download
+the information, but it gave me insight on how to add informational data to p5.js. I struggled with adding the ellipses instead of the vertex but I asked my classmates
+for a little help, and they showed me their way. I also wanted to add some text that relates to Kanye, so i chose random colors with a dark background to show
+how chaotic Kanye could be.
+
+
 
 let string ="i want kim back";
 let kanyeWestData;
