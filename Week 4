@@ -3,11 +3,13 @@ https://editor.p5js.org/Devynnn/sketches/qa55QhgY7
 For this assignment, I've learned to implement google trend data onto P5.js. There was not much thought put into it as we learned it step by step in class.
 I was looking for a serious topic that sparked a lot of peoples interest on the internet today and decided to go with Kanye West. Hilarious i know, but as you can
 see throught the data, at this moment time the amount of time Kanye West has been searched for has peaked its highest. Its a whole process to go search and download
-the information, but it gave me insight on how to add informational data to p5.js.
+the information, but it gave me insight on how to add informational data to p5.js. I also wanted to add some text that relates to Kanye, so i chose random colors
+with a dark background to show how chaotic Kanye could be.
 
-let kanyeWestData
+let string ="i want kim back";
+let kanyeWestData;
 function preload() {
-  kanyeWestData=loadTable('multiTimeline.csv',"csv");
+  kanyeWestData = loadTable("multiTimeline.csv", "csv");
 }
 
 function setup() {
@@ -17,16 +19,21 @@ function setup() {
 }
 
 function draw() {
-  background(220);
-  noFill();
+  background(0);
+  noFill()
   beginShape();
-  for(let i=3;i<kanyeWestData.getRowCount();i++)
-{
-//print(kanyeWestData.getString(i,0),kanyeWestData.getString(i,1));
-  let newYpos= map(kanyeWestData.getString(i,1),0,100,height,0);
-  vertex(i,newYpos);
-  
-  //vertex(i,height-kanyeWestData.getString(i,1));
+  for (let i = 3; i < kanyeWestData.getRowCount(); i++) {
+    print(kanyeWestData.getString(i, 0), kanyeWestData.getString(i, 1));
+    let newYpos = map(kanyeWestData.getString(i, 1), 0, 100, height, 0);
+    // vertex(i,newYpos);
+stroke(random (0,255),random(0,255), random(0,255));
+    ellipse(i, height - kanyeWestData.getString(i, 1), 80);
+  }
+  // endShape();
+
+  for(let i =0;i<string.length;i++) {
+    let xpos = 100+20*i;
+    textSize(30);
+    text(string[i], xpos, height/2+10*noise(frameCount/100+20*i));
 }
-  endShape();
 }
