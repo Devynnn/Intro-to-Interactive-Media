@@ -1,0 +1,313 @@
+code link : https://editor.p5js.org/Devynnn/sketches/1KAtHIgfH
+full screen link : https://editor.p5js.org/Devynnn/full/1KAtHIgfH
+
+Devyn Bushelaibi
+Professor Mathura Govindarajan
+Introduction to Interactive Media
+9th March. 2021
+Disco Parlor; Midterm Project Documentation
+
+
+Stage 1: Idea
+I wanted to recreate a nostalgic game that I used to play on my old iPad, except it would have a challenging obstacle. The more I can replicate the client to the picture the more scores I gain. It could be 60 seconds to 30. Another idea was to make it into a 70’s aesthetic look, which I achieved by the eyes, afro, music and lights.
+
+Stage 2: Research
+I downloaded dress up games to get an idea of how to make my game more unique, I thought of using different shapes for their faces, and the features. The P5.js reference page and YouTube were my best friends, I searched for how to get the replicates pictures (on top left) to switch as soon as the last character is done. 
+
+Stage 3: Coding
+I wanted my game to be as simple as possible, so the characters are made abstract purposely. I started with the background of the parlor, I wanted it to be colorful to replicate a club-like room with pastel colored led lights and different colors. I started with
+
+colorMode and HSB (Hue, Saturation to make it lighter, then brightening the colors) using framecount, I would know how much frames have passed ever since the program started. Before all that, I added Push and pop to save the rectangles I made as the wallpaper, and then restore its setting.
+
+if (frameCount % 60 == 0) {
+      colorarr = [
+        random(360),
+        random(360),
+        random(360),
+        random(360),
+        random(360),
+        random(360),
+      ];
+
+I later started with buttons, one of the most important use in the game. I made small squares for each element and then wrote each function of the button and what its used for adding the text from google in assets and loading its font.
+function preload() {
+  myFont = loadFont("assets/font.ttf");
+
+and then for the buttons, I used the function mouseReleased depending on where each supposed button should be, by using mouseX and mouseY positions so when the person playing clicks on the certain place it increments the variables that point to the current features ( face, hair, eye, nose, mouth, modifications)
+
+
+function mouseReleased() {
+  if (30 <= mouseX && mouseX <= 70 && 440 <= mouseY && 480 <= mouseY) {
+    currface += 1;
+    currface = currface % faces.length;
+  }
+
+  if (130 <= mouseX && mouseX <= 170 && 440 <= mouseY && 480 <= mouseY) {
+    currhair += 1;
+    currhair = currhair % hair.length;
+  }
+
+  if (230 <= mouseX && mouseX <= 270 && 440 <= mouseY && 480 <= mouseY) {
+    curreye += 1;
+    curreye = curreye % eyes.length;
+  }
+
+  if (330 <= mouseX && mouseX <= 370 && 440 <= mouseY && 480 <= mouseY) {
+    currnose += 1;
+    currnose = currnose % noses.length;
+  }
+
+  if (430 <= mouseX && mouseX <= 470 && 440 <= mouseY && 480 <= mouseY) {
+    currmouth += 1;
+    currmouth = currmouth % mouths.length;
+  }
+
+  if (530 <= mouseX && mouseX <= 570 && 440 <= mouseY && 480 <= mouseY) {
+    currmodif += 1;
+    currmodif = currmodif % modifs.length;
+  }
+
+}
+
+
+Face swap technology: 
+
+I had separate arrays for each facial feature that I cycled through depending on the mouse clicks mentioned earlier.
+
+  //face:
+
+  //rect
+  faces.push([210, 180, 180, 180]);
+  //circle
+  faces.push([300, 270, 200]);
+  //triangle
+  faces.push([300, 180, 200, 380, 400, 380]);
+
+  //hair:
+
+  //afro pink
+  hair.push([255, 135, 193]);
+  //afro brown
+  hair.push([74, 46, 59]);
+  //afro blue
+  hair.push([9, 106, 171]);
+
+  //eye
+  eyes.push(50);
+  eyes.push(80);
+  eyes.push(40);
+
+  //noses
+  noses.push([285, 270, 30, 10]);
+  noses.push([300, 270, 30]);
+  noses.push([300, 270, 330, 300, 270, 300]);
+
+  //mouths
+  mouths.push(80);
+  mouths.push(80);
+  mouths.push(80);
+
+  //modifications
+  modifs.push(20);
+  modifs.push(20);
+  modifs.push(20);
+  target = new Target();
+  for (let i = 0; i < 4; i++) {
+    let charlist = [];
+    for (let j = 0; j < 4; j++) {
+      charlist.push(new Target());
+    }
+    chars.push(charlist);
+  } 
+
+According to these arrays, appropriate shapes were displayed on the screen.
+
+   push();
+    noStroke();
+    fill(hair[currhair][0], hair[currhair][1], hair[currhair][2]);
+    circle(width / 2, 200, 300);
+    pop();
+    push();
+    noStroke();
+    if (currface == 0) {
+      fill(0, 255, 0);
+      rect(faces[0][0], faces[0][1], faces[0][2], faces[0][3]);
+    } else if (currface == 1) {
+      fill(191, 73, 73);
+      circle(faces[1][0], faces[1][1], faces[1][2]);
+    } else {
+      fill(179, 255, 254);
+      triangle(
+        faces[2][0],
+        faces[2][1],
+        faces[2][2],
+        faces[2][3],
+        faces[2][4],
+        faces[2][5]
+      );
+    }
+    pop();
+    push();
+
+    if (curreye == 0) {
+      circle(250, 230, eyes[curreye]);
+      circle(350, 230, eyes[curreye]);
+    } else if (curreye == 1) {
+      arc(250, 230, eyes[curreye], eyes[curreye], 0, PI, PIE);
+      arc(350, 230, eyes[curreye], eyes[curreye], 0, PI, PIE);
+    } else {
+      line(220, 230, eyes[curreye] + 220, 230);
+      line(340, 230, eyes[curreye] + 340, 230);
+    }
+
+    pop();
+    push();
+    if (currnose == 0) {
+      rect(noses[0][0], noses[0][1], noses[0][2], noses[0][3]);
+    } else if (currnose == 1) {
+      circle(noses[1][0], noses[1][1], noses[1][2]);
+    } else {
+      triangle(
+        noses[2][0],
+        noses[2][1],
+        noses[2][2],
+        noses[2][3],
+        noses[2][4],
+        noses[2][5]
+      );
+    }
+    pop();
+
+    //mouth lines
+    push();
+    noFill();
+    strokeWeight(3);
+    stroke(0, 0, 0);
+    if (currmouth == 0) {
+      arc(300, 300, mouths[currmouth], mouths[currmouth], 0, PI);
+    } else if (currmouth == 1) {
+      stroke(255, 196, 238);
+      arc(300, 350, mouths[currmouth], mouths[currmouth], PI, 2 * PI);
+    } else {
+      stroke(255, 220, 125);
+      line(250, 330, 270 + mouths[currmouth], 330);
+    }
+
+    pop();
+
+    //modifs
+    push();
+    if (currmodif == 0) {
+      noStroke();
+      fill(255, 255, 255);
+      rect(200, 230, modifs[currmodif], modifs[currmodif]);
+      rect(380, 230, modifs[currmodif], modifs[currmodif]);
+    } else if (currmodif == 1) {
+      noStroke();
+      fill(166, 41, 41);
+      circle(210, 250, modifs[currmodif]);
+      circle(390, 250, modifs[currmodif]);
+    } else {
+      noStroke();
+      fill(203, 187, 250);
+      triangle(200, 250, 210, 240, 220, 250);
+      triangle(380, 250, 390, 240, 400, 250);
+    }
+    pop();
+
+The game time-based, so when the user runs out of time, the game ends. When the user enters the game, they’re given 60 seconds to replicate the picture above which is calculated through the frameCount variable.
+
+text("Time left: " + Math.round((gameend - frameCount) / 60), 400, 50);
+gameend = frameCount + gametime * 60;
+
+To simulate the target, face the user needs to replicated, I created a class that is initialized with random feature indices. As the user cycles through various features the target refreshes the random variables and increases the players score.
+
+
+class Target {
+  constructor() {
+    this.score = 0;
+    this.makenew();
+  }
+  makenew() {
+    this.face = Math.floor(random(faces.length));
+    this.hair = Math.floor(random(hair.length));
+    this.eye = Math.floor(random(eyes.length));
+    this.nose = Math.floor(random(noses.length));
+    this.mouth = Math.floor(random(mouths.length));
+    this.modif = Math.floor(random(modifs.length));
+  }
+
+By copying the previous draw code and scaling it down and moving it to the top left corner using the random variables we were able to display the target face. For every draw loop the target values were compared to the users value and if all the values matched the face would be refreshed. 
+
+
+    if (
+      this.face == currface &&
+      this.hair == currhair &&
+      this.eye == curreye &&
+      this.nose == currnose &&
+      this.mouth == currmouth &&
+      this.modif == currmodif
+    ) {
+      this.makenew();
+      this.score += 1;
+    }
+  
+There’s a variable called screen that dictates what stage of the game we’re on
+
+screen 0 displays the start screen:
+
+Start screen consists of a button that has start screen
+As well as the background with all the clients all over the screen, every second each client refreshes with the background color.
+
+//start game screen
+  if (screen == 0) {
+    target.score = 0;
+    push();
+    colorMode(HSB);
+    if (frameCount % 60 == 0) currcolor = random(360);
+    background(currcolor, 20, 100);
+
+screen 1 displays the game screen:
+
+this is where the game is. When the timer runs out the screen value reset to screen 2
+
+screen 2 displays the end screen:
+
+displays the score and a button to restart the game. When the button is clicked the users score resets and the screen value is set to screen 0
+
+} else {
+    //game over screen
+    push();
+    colorMode(HSB);
+    if (frameCount % 60 == 0) currcolor = random(360);
+    background(currcolor, 20, 100);
+    pop();
+    push();
+    stroke(255);
+    fill(0);
+    strokeWeight(10);
+    textSize(60);
+    textAlign(CENTER);
+    textSize(60);
+    text("Game over", width / 2, height / 2 - 40);
+    textSize(40);
+    text("Your score:" + target.score, width / 2, height / 2 + 30);
+    pop();
+    restartbutton.show();
+    restartbutton.style("font-size", "40px");
+    restartbutton.position(140, 400);
+    restartbutton.mousePressed(function () {
+      screen = 0;
+      restartbutton.hide();
+    });
+  }
+
+
+Problems I encountered: 
+
+Changing colors for the client face and the target face was difficult to manage since there’s a lot of moving parts and the code is copy pasted across the target class and the draw function. In the future using some type of function to reduce the amount of code and make it reusable will be sufficient.
+Theres also a problem with the background music when i wanted to turn the game into a full screen, i didnt know how to fix it.
+
+Reflection: 
+
+I had a lot of fun figuring out implementations in the game and how to work my way around it. Next time I’ll make a part 2 with better options and more screens. 
