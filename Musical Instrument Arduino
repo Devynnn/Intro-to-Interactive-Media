@@ -1,0 +1,118 @@
+documentation
+
+Final Video:
+https://youtube.com/shorts/MEtcZQo_HlU?feature=share
+
+Process:
+
+At first we thought we would invent an instrument that only works when we shake, we would fill it half way up with water and once the wire touches the
+water it would light up and make a sound. We attempted to realize this concept by placing two wires on the top portion of the bottle, which would break
+the current when the bottle was upright. However, this did not work properly since the current was extremely unsteady, and the bottle began to leak
+through the wire's perforations. Our last concept was to make a xylophone, but because we didn't want to utilize force sensors or buttons for every note,
+we chose to use an ultrasonic sensor instead.
+
+We were a little perplexed about how to begin with the ultrasonic sensor, so we looked it out on the internet and worked out how to link the sensor to
+the code. We used the tone() method to write "if statements" for each key once we established the distances for our sensor. We also utilized an array to
+hold all of our tones, making the if statements easier to write. We added a switch to attempt to meet the digital sensor requirement which worked greatly.
+We then added a switch in a series circuit after asking for assistance, making it a manual switch.
+
+We then tidied up our code and customized our instrument in this last step adding tape paddle to go with it. The plan was for the paddle to be at a certain 
+distance where it would perform a different tone every time you hit in further.
+
+
+final code:
+
+const int pingPin = 7; // Trigger Pin of Ultrasonic Sensor
+const int echoPin = 6; // Echo Pin of Ultrasonic Sensor
+
+//tones
+
+int speakerPin = 12;
+
+int tones[] = {261, 277, 294, 311, 330, 349, 370, 392, 415, 440};
+//            mid C  C#   D    D#   E    F    F#   G    G#   A
+
+void setup() {
+   Serial.begin(9600); // Starting Serial Terminal
+}
+
+void loop() {
+   long duration, inches, cm;
+   pinMode(pingPin, OUTPUT);
+   digitalWrite(pingPin, LOW);
+   delayMicroseconds(2);
+   digitalWrite(pingPin, HIGH);
+   delayMicroseconds(10);
+   digitalWrite(pingPin, LOW);
+   pinMode(echoPin, INPUT);
+   duration = pulseIn(echoPin, HIGH);
+   inches = microsecondsToInches(duration);
+   cm = microsecondsToCentimeters(duration);
+   Serial.print(inches);
+   Serial.print("in, ");
+   Serial.print(cm);
+   Serial.print("cm");
+   Serial.println();
+   delay(100);
+
+ 
+   if (cm >= 2 && cm <= 5){
+   tone(speakerPin, tones[1]);
+   }
+  
+     else if (cm >5 && cm <= 8){
+   tone(speakerPin, tones[2]);
+   }
+
+     else if (cm > 8 && cm <= 11){
+   tone(speakerPin, tones[3]);
+   }
+  
+    else  if (cm > 11 && cm <= 14){
+   tone(speakerPin, tones[4]);
+   }
+    else  if (cm > 14 && cm <= 17){
+   tone(speakerPin, tones[5]);
+   }
+    else  if (cm > 20 && cm <= 23){
+   tone(speakerPin, tones[6]);
+   }
+    else  if (cm > 23 && cm <= 26){
+   tone(speakerPin, tones[7]);
+   }
+    else  if (cm > 29 && cm <= 32){
+   tone(speakerPin, tones[8]);
+   }
+    else  if (cm > 32 && cm <= 35){
+   tone(speakerPin, tones[9]);
+   }
+   else  if (cm > 35 && cm <= 38){
+   tone(speakerPin, tones[10]);
+   }
+   else {
+    noTone(speakerPin);
+   }
+  
+}
+
+long microsecondsToInches(long microseconds) {
+   return microseconds / 74 / 2;
+}
+
+long microsecondsToCentimeters(long microseconds) {
+   return microseconds / 29 / 2;
+}
+
+
+
+
+reflection:
+
+It was a difficult time to make the project since we both had different time schedules, she would be busy at night while im busy in the day. However,
+we decided it would be best if we stayed up atleast one night to finally attempt to finish it. It turned amazing, my favourite bit of the whole project
+it decorating the xylophone as well as the part where i left my whole stuff in the lab and not being able to access it until the next morning. The most
+important part is that we finally got it done with.
+
+
+
+
